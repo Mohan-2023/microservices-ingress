@@ -88,23 +88,21 @@ Access Jenkins and setup Jenkins
 2.1.2 Install Docker
 vi docker.sh ----> Paste the below content ---->
 #!/bin/bash
-# Update package manager repositories
+# Add Docker's official GPG key:
 sudo apt-get update
-# Install necessary dependencies
-sudo apt-get install -y ca-certificates curl
-# Create directory for Docker GPG key
+sudo apt-get install ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
-# Download Docker's GPG key
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-# Ensure proper permissions for the key
 sudo chmod a+r /etc/apt/keyrings/docker.asc
-# Add Docker repository to Apt sources
-echo "deb \[arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \\
-$(. /etc/os-release \&\& echo "$VERSION\_CODENAME") stable" | \\
-sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 # Update package manager repositories
 sudo apt-get update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
 ----> esc ----> :wq ----> sudo chmod +x docker.sh ----> ./docker.sh
 
@@ -152,9 +150,7 @@ Attach the below inline policy also for the same user
 With this we have created the IAM User with appropriate permissions to create the EKS Cluster
 
 4.4. Install AWS CLI (to interact with AWS Account)
-sudo apt update
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86\_64.zip" -o "awscliv2.zip"
-sudo apt install unzip
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
 
