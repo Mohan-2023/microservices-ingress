@@ -177,7 +177,7 @@ sudo systemctl restart docker
 sudo systemctl restart jenkins
 
 4.9. Installation of Ingress Controller
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.1/deploy/static/provider/aws/deploy.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.13.2/deploy/static/provider/aws/deploy.yaml
 
 #Wait for sometime for the pods to create
 kubectl get pods -n ingress-nginx
