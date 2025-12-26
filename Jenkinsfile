@@ -13,8 +13,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checking out source code...'
-                git branch: 'main', 
-                url: 'https://github.com/Mohan-2023/microservices-ingress.git'
+                git branch: 'main', url: 'https://github.com/Mohan-2023/microservices-ingress.git'
             }
         }
 
